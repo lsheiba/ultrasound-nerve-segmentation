@@ -5,7 +5,7 @@ import numpy as np
 
 from skimage.io import imsave, imread
 
-data_path = 'raw/'
+data_path = os.environ['DATASET_DIR']+os.sep
 
 image_rows = 420
 image_cols = 580
@@ -13,6 +13,7 @@ image_cols = 580
 
 def create_train_data():
     train_data_path = os.path.join(data_path, 'train')
+    print(train_data_path)
     images = os.listdir(train_data_path)
     total = len(images) / 2
 
@@ -24,6 +25,7 @@ def create_train_data():
     print('Creating training images...')
     print('-'*30)
     for image_name in images:
+        print('.')
         if 'mask' in image_name:
             continue
         image_mask_name = image_name.split('.')[0] + '_mask.tif'
@@ -41,14 +43,14 @@ def create_train_data():
         i += 1
     print('Loading done.')
 
-    np.save('imgs_train.npy', imgs)
-    np.save('imgs_mask_train.npy', imgs_mask)
+    np.save(os.environ['DATA_DIR']+os.sep+'imgs_train.npy', imgs)
+    np.save(os.environ['DATA_DIR']+os.sep+'imgs_mask_train.npy', imgs_mask)
     print('Saving to .npy files done.')
 
 
 def load_train_data():
-    imgs_train = np.load('imgs_train.npy')
-    imgs_mask_train = np.load('imgs_mask_train.npy')
+    imgs_train = np.load(os.environ['DATA_DIR']+os.sep+'imgs_train.npy')
+    imgs_mask_train = np.load(os.environ['DATA_DIR']+os.sep+'imgs_mask_train.npy')
     return imgs_train, imgs_mask_train
 
 
@@ -78,14 +80,14 @@ def create_test_data():
         i += 1
     print('Loading done.')
 
-    np.save('imgs_test.npy', imgs)
-    np.save('imgs_id_test.npy', imgs_id)
+    np.save(os.environ['DATA_DIR']+os.sep+'imgs_test.npy', imgs)
+    np.save(os.environ['DATA_DIR']+os.sep+'imgs_id_test.npy', imgs_id)
     print('Saving to .npy files done.')
 
 
 def load_test_data():
-    imgs_test = np.load('imgs_test.npy')
-    imgs_id = np.load('imgs_id_test.npy')
+    imgs_test = np.load(os.environ['DATA_DIR']+os.sep+'imgs_test.npy')
+    imgs_id = np.load(os.environ['DATA_DIR']+os.sep+'imgs_id_test.npy')
     return imgs_test, imgs_id
 
 if __name__ == '__main__':

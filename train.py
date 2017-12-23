@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import math
 import os
 from skimage.transform import resize
 from skimage.io import imsave
@@ -137,12 +138,12 @@ def train_and_predict():
     print('Predicting masks on test data...')
     print('-'*30)
     imgs_mask_test = model.predict(imgs_test, verbose=1)
-    np.save('imgs_mask_test.npy', imgs_mask_test)
+    np.save(os.environ['DATA_DIR']+os.sep+'imgs_mask_test.npy', imgs_mask_test)
 
     print('-' * 30)
     print('Saving predicted masks to files...')
     print('-' * 30)
-    pred_dir = 'preds'
+    pred_dir = os.environ['TRAINING_DIR']
     if not os.path.exists(pred_dir):
         os.mkdir(pred_dir)
     for image, image_id in zip(imgs_mask_test, imgs_id_test):
