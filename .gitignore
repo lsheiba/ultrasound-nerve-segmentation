@@ -2,3 +2,4 @@
 *.npy
 *.csv
 *.hdf5
+ultrasound-nerve-segmentation.code-workspace

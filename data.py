@@ -15,7 +15,7 @@ def create_train_data():
     train_data_path = os.path.join(data_path, 'train')
     print(train_data_path)
     images = os.listdir(train_data_path)
-    total = len(images) / 2
+    total = len(images) // 2
 
     imgs = np.ndarray((total, image_rows, image_cols), dtype=np.uint8)
     imgs_mask = np.ndarray((total, image_rows, image_cols), dtype=np.uint8)
@@ -25,7 +25,7 @@ def create_train_data():
     print('Creating training images...')
     print('-'*30)
     for image_name in images:
-        print('.')
+#       print('.')
         if 'mask' in image_name:
             continue
         image_mask_name = image_name.split('.')[0] + '_mask.tif'
