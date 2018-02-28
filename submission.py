@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import numpy as np
+import os
 from skimage.transform import resize
 from data import image_cols, image_rows
 
@@ -30,7 +31,7 @@ def run_length_enc(label):
 def submission():
     from data import load_test_data
     imgs_test, imgs_id_test = load_test_data()
-    imgs_test = np.load('imgs_mask_test.npy')
+    imgs_test = np.load(os.environ['DATA_DIR']+ os.sep + 'imgs_mask_test.npy')
 
     argsort = np.argsort(imgs_id_test)
     imgs_id_test = imgs_id_test[argsort]
